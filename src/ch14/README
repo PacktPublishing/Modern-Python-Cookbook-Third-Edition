@@ -1,0 +1,22 @@
+On the Pascal app.
+
+https://www.freepascal.org
+
+If using Free Pascal on Mac OS X, some XCode preparation is required...
+
+```bash
+xcode-select --install
+sudo xcodebuild -license accept
+```
+
+To Compile with Free Pascal. 
+
+```bash
+fpc markov_gen.pas  
+```
+
+To Run
+
+```bash
+./markov_gen --samples 1000 somefile.toml
+```

@@ -1,0 +1,14 @@
+# Python Cookbook, 3rd Ed.
+tox
+poetry
+mypy
+#
+pydantic
+beautifulsoup4
+types-beautifulsoup4
+invoke
+jupyterlab
+matplotlib
+pytest
+memray
+sphinx

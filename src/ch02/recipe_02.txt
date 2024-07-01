@@ -1,0 +1,101 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Writing long lines of code
+
+
+# Subsection: Getting ready
+
+>>> import math
+
+>>> example_value = (63/25) * (17+15*math.sqrt(5)) / (7+15*math.sqrt(5))
+
+>>> mantissa_fraction, exponent = math.frexp(example_value)
+>>> mantissa_whole = int(mantissa_fraction*2**53)
+>>> message_text = f'the internal representation is {mantissa_whole:d}/2**53*2**{exponent:d}'
+>>> print(message_text)
+the internal representation is 7074237752514592/2**53*2**2
+
+
+# Subsection: How to do it...
+# Topic: Using a backslash to break a long statement into logical lines
+
+>>> import math
+
+>>> example_value = (63/25) * (17+15*math.sqrt(5)) / (7+15*math.sqrt(5))
+
+>>> mantissa_fraction, exponent = math.frexp(example_value)
+>>> mantissa_whole = int(mantissa_fraction*2**53)
+
+>>> message_text = f'the internal representation is {mantissa_whole:d}/2**53*2**{exponent:d}'
+
+>>> message_text = f'the internal representation is \
+... {mantissa_whole:d}/2**53*2**{exponent:d}'
+
+
+# Subsection: How to do it...
+# Topic: Using the () characters to break a long statement into sensible pieces
+
+>>> import math
+
+>>> example_value1 = (63/25) * (17+15*math.sqrt(5)) / (7+15*math.sqrt(5))
+
+>>> example_value2 = (63/25) * ( (17+15*math.sqrt(5)) / (7+15*math.sqrt(5)) )
+
+>>> example_value2 == example_value1
+True
+
+>>> example_value3 = (63/25) * (
+...     (17+15*math.sqrt(5))
+...     / (7+15*math.sqrt(5))
+... )
+
+>>> example_value3 == example_value1
+True
+
+
+# Subsection: How to do it...
+# Topic: Using string literal concatenation
+
+>>> message_text = (
+... f'the internal representation '
+... f'is {mantissa_whole:d}/2**53*2**{exponent:d}'
+... )
+
+>>> message_text
+'the internal representation is 7074237752514592/2**53*2**2'
+
+
+# Subsection: How to do it...
+# Topic: Assigning intermediate results to separate variables
+
+>>> import math
+
+>>> example_value = (63/25) * (17+15*math.sqrt(5)) / (7+15*math.sqrt(5))
+
+>>> a = (63/25)
+>>> b = (17+15*math.sqrt(5))
+>>> c = (7+15*math.sqrt(5))
+
+>>> example_value = a * b / c
+
+
+# Subsection: How it works...
+
+>>> print(
+... 'several values including',
+... 'mantissa =', mantissa_whole,
+... 'exponent =', exponent
+... )
+several values including mantissa = 7074237752514592 exponent = 2
+
+
+# Subsection: There's more...
+
+>>> from math import (
+...     sin, cos, tan,
+...     sqrt, log, frexp)
+
+
+
+# End of Writing long lines of code

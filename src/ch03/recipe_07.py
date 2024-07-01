@@ -1,0 +1,96 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Function Definitions
+# Recipe: Writing hints for more complex types
+
+
+
+def temperature(*, f_temp=None, c_temp=None):
+    if c_temp is None:
+        return {'f_temp': f_temp, 'c_temp': 5*(f_temp-32)/9}
+    elif f_temp is None:
+        return {'f_temp': 32+9*c_temp/5, 'c_temp': c_temp}
+    else:
+        raise TypeError("One of f_temp or c_temp must be provided")
+
+# Subsection: How to do it...
+
+def temperature_1(*,
+    f_temp: float | None = None,
+    c_temp: float | None = None):
+    ...  # etc.
+
+
+def temperature_2(*,
+    f_temp: float | None = None,
+    c_temp: float | None = None
+) -> dict[str, float | None]:
+    ...  # etc.
+    result: dict[str, float | None] = {
+        "c_temp": c_temp, "f_temp": f_temp
+    }
+    return result
+
+
+def temperature_3(*,
+    f_temp: float | None = None,
+    c_temp: float | None = None
+) -> dict[str, float | None]:
+    """Convert between Fahrenheit temperature and Celsius temperature.
+
+    :key f_temp: Temperature in °F.
+    :key c_temp: Temperature in °C.
+
+    :returns: dictionary with two keys:
+        :f_temp: Temperature in °F.
+        :c_temp: Temperature in °C.
+    """
+    ...  # etc.
+    return {}  # A placeholder for mypy.
+
+
+# Subsection: How it works...
+
+
+# Subsection: There's more...
+
+from typing import TypedDict
+
+TempDict = TypedDict(
+    "TempDict",
+    {
+        "c_temp": float,
+        "f_temp": float,
+    }
+)
+
+
+def temperature_d(
+    *,
+    f_temp: float | None = None,
+    c_temp: float | None = None
+) -> TempDict:
+    if f_temp is not None:
+        c_temp = 5 * (f_temp - 32) / 9
+    elif c_temp is not None:
+        f_temp = 32 + 9 * c_temp / 5
+    else:
+        raise TypeError("One of f_temp or c_temp must be provided")
+    result: TempDict = {"c_temp": c_temp, "f_temp": f_temp}
+    return result
+
+
+
+# End of Writing hints for more complex types
+
+
+test_temperature = """
+>>> temperature(f_temp=-13)
+{'f_temp': -13, 'c_temp': -25.0}
+>>> temperature_d(f_temp=-13)
+{'c_temp': -25.0, 'f_temp': -13}
+>>> temperature_d(c_temp=-25)
+{'c_temp': -25, 'f_temp': -13.0}
+"""
+
+__test__ = {name: code for name, code in locals().items() if name.startswith("test_")}

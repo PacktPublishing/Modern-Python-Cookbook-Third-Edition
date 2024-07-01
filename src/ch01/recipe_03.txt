@@ -1,0 +1,55 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Choosing between true division and floor division
+
+
+# Subsection: How to do it...
+# Topic: Doing floor division
+
+>>> total_seconds = 7385
+>>> hours = total_seconds // 3600
+>>> remaining_seconds = total_seconds % 3600
+
+>>> minutes = remaining_seconds // 60
+>>> seconds = remaining_seconds % 60
+>>> hours, minutes, seconds
+(2, 3, 5)
+
+>>> total_seconds = 7385
+>>> hours, remaining_seconds = divmod(total_seconds, 3600)
+
+>>> minutes, seconds = divmod(remaining_seconds, 60)
+>>> hours, minutes, seconds
+(2, 3, 5)
+
+
+# Subsection: How to do it...
+# Topic: Doing true division
+
+>>> total_seconds = 7385
+>>> hours = total_seconds / 3600
+>>> round(hours, 4)
+2.0514
+
+
+# Subsection: How to do it...
+# Topic: Rational fraction calculations
+
+>>> from fractions import Fraction
+>>> total_seconds = Fraction(7385)
+
+>>> hours = total_seconds / 3600
+>>> hours
+Fraction(1477, 720)
+
+>>> round(float(hours), 4)
+2.0514
+
+
+# Subsection: How it works...
+
+>>> 7358.0 // 3600.0
+2.0
+
+

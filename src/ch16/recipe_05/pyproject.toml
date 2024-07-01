@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "recipe-05"
+version = "0.1.0"
+description = "Python Cookbook, 3rd Ed., Chapter 17, Dependencies and Virtual Environments"
+authors = ["Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.6.0"
+beautifulsoup4 = "^4.12.3"
+jupyterlab = "^4.0.12"
+matplotlib = "^3.8.2"
+pytest = "^8.0.0"
+memray = "^1.11.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

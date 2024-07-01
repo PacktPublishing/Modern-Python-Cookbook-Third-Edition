@@ -1,0 +1,94 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Built-In Data Structures Part 1: Lists and Sets
+# Recipe: Removing items from a set -- remove(), pop(), and difference
+
+
+# Subsection: Getting ready
+
+>>> log = """
+... [2016-03-05T09:29:31-05:00] INFO: Processing ruby_block[print IP] action run (@recipe_files::/home/slott/ch4/deploy.rb line 9)
+... [2016-03-05T09:29:31-05:00] INFO: Installed IP: 111.222.111.222
+... [2016-03-05T09:29:31-05:00] INFO: ruby_block[print IP] called
+...
+... - execute the ruby block print IP
+...
+... [2016-03-05T09:29:31-05:00] INFO: Chef Run complete in 23.233811181 seconds
+...
+... Running handlers:
+...
+... [2016-03-05T09:29:31-05:00] INFO: Running report handlers
+...
+... Running handlers complete
+...
+... [2016-03-05T09:29:31-05:00] INFO: Report handlers complete
+...
+... Chef Client finished, 2/2 resources updated in 29.233811181 seconds
+... """
+
+>>> import re
+>>> pattern = re.compile(r"IP: \d+\.\d+\.\d+\.\d+")
+>>> matches = set(pattern.findall(log))
+>>> matches
+{'IP: 111.222.111.222'}
+
+
+# Subsection: How to do it...
+
+>>> to_be_ignored = {'IP: 0.0.0.0', 'IP: 1.2.3.4'}
+
+>>> matches = {'IP: 111.222.111.222', 'IP: 1.2.3.4'}
+
+
+>>> matches - to_be_ignored
+{'IP: 111.222.111.222'}
+>>> matches.difference(to_be_ignored)
+{'IP: 111.222.111.222'}
+
+
+>>> valid_matches = matches - to_be_ignored
+>>> valid_matches
+{'IP: 111.222.111.222'}
+
+# Subsection: There's more...
+
+>>> import re
+>>> pattern = re.compile(r"IP: \d+\.\d+\.\d+\.\d+")
+>>> matches = set(pattern.findall(log))
+
+>>> valid_matches = matches.copy()
+>>> valid_matches.difference_update(to_be_ignored)
+>>> valid_matches
+{'IP: 111.222.111.222'}
+
+
+>>> import re
+>>> pattern = re.compile(r"IP: \d+\.\d+\.\d+\.\d+")
+>>> matches = set(pattern.findall(log))
+
+>>> valid_matches = matches.copy()
+>>> for item in to_be_ignored:
+...     if item in valid_matches:
+...         valid_matches.remove(item)
+
+>>> valid_matches
+{'IP: 111.222.111.222'}
+
+
+>>> import re
+>>> pattern = re.compile(r"IP: \d+\.\d+\.\d+\.\d+")
+>>> matches = set(pattern.findall(log))
+
+>>> valid_matches = matches.copy()
+>>> for item in to_be_ignored:
+...     try:
+...         valid_matches.remove(item)
+...     except KeyError:
+...         pass
+
+>>> valid_matches
+{'IP: 111.222.111.222'}
+
+
+
+# End of Removing items from a set -- remove(), pop(), and difference

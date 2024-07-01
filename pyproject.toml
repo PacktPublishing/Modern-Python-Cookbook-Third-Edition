@@ -1,0 +1,17 @@
+[project]
+name = "python_cookbook_3e"
+version = "2024.1.0"
+description = "All of the code examples for Modern Python Cookbook, 3rd Ed."
+readme = "README"
+requires-python = ">=3.12"
+license = {file = "LICENSE.txt"}
+authors = [
+  {email = "slott56@gmail.com"},
+  {name = "Steven F. Lott"}
+]
+
+[build-system]
+build-backend = 'setuptools.build_meta'
+requires = [
+    'setuptools',
+]

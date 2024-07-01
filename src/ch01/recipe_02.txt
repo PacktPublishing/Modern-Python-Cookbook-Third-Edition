@@ -1,0 +1,101 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Choosing between float, decimal, and fraction
+
+
+# Subsection: How to do it...
+# Topic: Doing currency calculations
+
+>>> from decimal import Decimal
+
+>>> tax_rate = Decimal('7.25')/Decimal(100)
+>>> purchase_amount = Decimal('2.95')
+>>> tax_rate * purchase_amount
+Decimal('0.213875')
+
+>>> penny = Decimal('0.01')
+
+>>> total_amount = purchase_amount + tax_rate * purchase_amount
+>>> total_amount.quantize(penny)
+Decimal('3.16')
+
+>>> import decimal
+>>> total_amount.quantize(penny, decimal.ROUND_UP)
+Decimal('3.17')
+
+
+# Subsection: How to do it...
+# Topic: Fraction calculations
+
+>>> from fractions import Fraction
+
+>>> sugar_cups = Fraction('2.5')
+>>> scale_factor = Fraction(5/8)
+>>> sugar_cups * scale_factor
+Fraction(25, 16)
+
+>>> Fraction(24, 16)
+Fraction(3, 2)
+
+
+# Subsection: How to do it...
+# Topic: Floating-point approximations
+
+>>> (19/155)*(155/19)
+0.9999999999999999
+
+>>> answer = (19/155)*(155/19)
+>>> round(answer, 3)
+1.0
+
+>>> 1 - answer
+1.1102230246251565e-16
+
+
+# Subsection: How to do it...
+# Topic: Converting numbers from one type into another
+
+>>> float(total_amount)
+3.163875
+>>> float(sugar_cups * scale_factor)
+1.5625
+
+>>> Fraction(19/155)
+Fraction(8832866365939553, 72057594037927936)
+
+>>> Decimal(19/155)
+Decimal('0.12258064516129031640279123394066118635237216949462890625')
+
+
+# Subsection: How it works...
+
+>>> 8.066e+67
+8.066e+67
+
+>>> (6737037547376141/(2**53))*(2**226)
+8.066e+67
+
+>>> import math
+>>> math.frexp(8.066E+67)
+(0.7479614202861186, 226)
+
+
+# Subsection: There's more...
+
+>>> (19/155)*(155/19) == 1.0
+False
+
+>>> math.isclose((19/155)*(155/19), 1.0)
+True
+
+>>> math.sqrt(-2)
+Traceback (most recent call last):
+...
+ValueError: math domain error
+
+>>> import cmath
+>>> cmath.sqrt(-2)
+1.4142135623730951j
+
+

@@ -1,0 +1,41 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Writing Python script and module files -- syntax basics
+
+
+# Subsection: How to do it...
+
+#!/usr/bin/env python3
+
+"""
+A summary of this script.
+"""
+
+print('hello world')
+
+#!/usr/bin/env python3
+"""
+My First Script: Calculate an important value.
+"""
+
+print(355 / 113)
+
+
+# Subsection: How it works...
+
+μ = 355/113
+print(μ)
+
+
+# Subsection: There's more...
+
+color = 355 / 113  # type: float
+
+color: float = 355 / 113
+
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
+
+
+# End of Writing Python script and module files -- syntax basics

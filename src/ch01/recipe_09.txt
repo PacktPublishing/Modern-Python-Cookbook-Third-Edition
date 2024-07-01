@@ -1,0 +1,32 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Encoding strings -- creating ASCII and UTF-8 bytes
+
+
+# Subsection: How to do it...
+
+  export PYTHONIOENCODING=UTF-8
+
+  python
+
+>>> with open('data/some_file.txt', 'w', encoding='utf-8') as output:
+...     print('You drew \U0001F000', file=output)
+>>> with open('data/some_file.txt', 'r', encoding='utf-8') as input:
+...     text = input.read()
+>>> text
+'You drew 🀀\n'
+
+>>> string_bytes = 'You drew \U0001F000'.encode('utf-8')
+>>> string_bytes
+b'You drew \xf0\x9f\x80\x80'
+
+
+# Subsection: How it works...
+
+>>> 'You drew \U0001F000'.encode('ascii')
+Traceback (most recent call last):
+...
+UnicodeEncodeError: 'ascii' codec can't encode character '\U0001f000' in position 9: ordinal not in range(128)
+
+

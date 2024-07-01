@@ -1,0 +1,66 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Leveraging exception matching rules
+
+# Test Setup
+>>> from pathlib import Path
+>>> data = Path.cwd() / "data" / "test.csv"
+>>> _ = data.write_text("Example\n")
+>>> for path in (Path.cwd()/"backup").glob("*"):
+...     path.unlink()
+>>> if (Path.cwd()/"backup").exists(): (Path.cwd()/"backup").rmdir()
+
+# Subsection: Getting ready
+
+>>> from pathlib import Path
+>>> import shutil
+
+>>> source_dir = Path.cwd()/"data"
+>>> target_dir = Path.cwd()/"backup"
+>>> for source_path in source_dir.glob('**/*.csv'):
+...     source_name = source_path.relative_to(source_dir)
+...     target_path = target_dir / source_name
+...     shutil.copy(source_path, target_path)
+... # doctest: +ELLIPSIS
+Traceback (most recent call last):
+...
+FileNotFoundError: [Errno 2] No such file or directory: ...
+
+# Subsection: How to do it...
+
+>>> try:
+...     shutil.copy(source_path, target_path)
+... except Exception:
+...     pass
+... # doctest: +SKIP
+
+>>> try:
+...     target = shutil.copy(source_path, target_path)
+... except FileNotFoundError:
+...     target_path.parent.mkdir(exist_ok=True, parents=True)
+...     target = shutil.copy(source_path, target_path)
+... except OSError as ex:
+...     print(f"Copy {source_path} to {target_path} error {ex}")
+
+
+# Subsection: There's more...
+
+>>> try:
+...     target = shutil.copy(source_path, target_path )
+... except FileNotFoundError:
+...     try:
+...         target_path.parent.mkdir(exist_ok=True, parents=True)
+...         target = shutil.copy(source_path, target_path)
+...     except OSError as ex2:
+...         print(f"{target_path.parent} problem: {ex2}")
+... except OSError as ex:
+...     print(f"Copy {source_path} to {target_path} error {ex}")
+
+
+
+# End of Leveraging exception matching rules
+# Test Cleanup
+>>> for path in (Path.cwd()/"backup").glob("*"):
+...     path.unlink()
+>>> (Path.cwd()/"backup").rmdir()

@@ -1,0 +1,44 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Decoding bytes -- how to get proper characters from some bytes
+
+
+# Subsection: Getting ready
+
+>>> import urllib.request
+>>> warnings_uri = (
+...     'https://forecast.weather.gov/'
+...     'product.php?site=AKQ&product=SMW&issuedby=AKQ'
+... )
+
+>>> with urllib.request.urlopen(warnings_uri) as source:
+...     forecast_text = source.read()
+
+$ curl 'https://forecast.weather.gov/product.php?site=AKQ&product=SMW&issuedby=AKQ' -o AKQ.html
+
+>>> with urllib.request.urlopen("file:src/ch01/Text Products for SMW Issued by AKQ.html") as source:
+...     forecast_text = source.read()
+
+>>> forecast_text[:80]
+b'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/x'
+
+
+# Subsection: How to do it...
+
+<xml version="1.0" encoding="UTF-8"?>
+
+Content-Type: text/html; charset=ISO-8859-4
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+>>> document = forecast_text.decode("UTF-8")
+>>> document[:80]
+'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/x'
+
+>>> import re
+>>> content_pattern = re.compile(r"// CONTENT STARTS(.*?)// CONTENT ENDS", re.MULTILINE | re.DOTALL)
+>>> content_pattern.search(document)
+<re.Match object; span=(8530, 9113), match='// CONTENT STARTS HERE -->\n\n<span style="font-s>
+
+

@@ -1,0 +1,32 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Using the Unicode characters that aren't on our keyboards
+
+
+# Subsection: Getting ready
+
+chcp 65001
+
+
+# Subsection: How to do it...
+
+>>> 'You Rolled \u2680'
+'You Rolled ⚀'
+
+>>> 'You drew \U0001F000'
+'You drew 🀀'
+
+>>> 'Discard \N{MAHJONG TILE RED DRAGON}'
+'Discard 🀄'
+
+
+# Subsection: How it works...
+
+'HELLO'
+
+'\u0048\u0045\u004c\u004c\u004f'
+
+>>> r"\w+"
+'\\w+'
+

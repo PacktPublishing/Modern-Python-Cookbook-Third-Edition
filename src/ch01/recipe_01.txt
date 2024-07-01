@@ -1,0 +1,31 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Working with large and small integers
+
+
+# Subsection: How to do it...
+
+>>> 2
+2
+
+>>> 0xff
+255
+
+>>> 2**2048
+323...656
+
+
+# Subsection: How it works...
+
+>>> import math
+>>> math.factorial(52)
+80658175170943878571660636856403766975289505440883277824000000000000
+
+>>> import sys
+>>> import math
+>>> math.log(sys.maxsize, 2)
+63.0
+>>> sys.int_info
+sys.int_info(bits_per_digit=30, sizeof_digit=4, default_max_str_digits=4300, str_digits_check_threshold=640)
+

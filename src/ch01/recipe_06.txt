@@ -1,0 +1,44 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Building complicated strings with f-strings
+
+
+# Subsection: Getting ready
+
+>>> id = "IAD"
+>>> location = "Dulles Intl Airport"
+>>> max_temp = 32
+>>> min_temp = 13
+>>> precipitation = 0.4
+
+IAD : Dulles Intl Airport : 32 / 13 / 0.40
+
+
+# Subsection: How to do it...
+
+f'{id} : {location} : {max_temp} / {min_temp} / {precipitation}'
+
+f'{id:s} : {location:s} : {max_temp:d} / {min_temp:d} / {precipitation:f}'
+
+>>> f'{id:3s} : {location:19s} : {max_temp:3d} / {min_temp:3d} / {precipitation:5.2f}'
+'IAD : Dulles Intl Airport :  32 /  13 /  0.40'
+
+
+# Subsection: How it works...
+
+>>> value = 2**12-1
+>>> f'{value=} {2**7+1=}'
+'value=4095 2**7+1=129'
+
+
+# Subsection: There's more...
+
+>>> data = dict(
+... id=id, location=location, max_temp=max_temp,
+... min_temp=min_temp, precipitation=precipitation
+... )
+>>> '{id:3s} : {location:19s} : {max_temp:3d} / {min_temp:3d} / {precipitation:5.2f}'.format_map(data)
+'IAD : Dulles Intl Airport :  32 /  13 /  0.40'
+
+

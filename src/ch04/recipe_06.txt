@@ -1,0 +1,46 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Built-In Data Structures Part 1: Lists and Sets
+# Recipe: Reversing a copy of a list
+
+
+# Subsection: Getting ready
+
+>>> week = 13
+>>> day = 2
+>>> hour = 7
+>>> minute = 53
+>>> second = 19
+
+>>> t_s = (((week*7+day)*24+hour)*60+minute)*60+second
+>>> t_s
+8063599
+
+>>> t_s = 8063599
+>>> fields = []
+>>> for base in 60, 60, 24, 7:
+...     t_s, f = divmod(t_s, base)
+...     fields.append(f)
+>>> fields.append(t_s)
+>>> fields
+[19, 53, 7, 2, 13]
+
+
+# Subsection: How to do it...
+
+>>> fields_copy1 = fields.copy()
+>>> fields_copy1.reverse()
+>>> fields_copy1
+[13, 2, 7, 53, 19]
+
+>>> fields_copy2 = fields[::-1]
+>>> fields_copy2
+[13, 2, 7, 53, 19]
+
+>>> fields_copy3 = list(reversed(fields))
+>>> fields_copy3
+[13, 2, 7, 53, 19]
+
+
+
+# End of Reversing a copy of a list

@@ -1,0 +1,57 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Using NamedTuples to simplify item access in tuples
+
+
+# Subsection: Getting ready
+
+r'(?P<ingredient>\w+):\s+(?P<amount>\d+)\s+(?P<unit>\w+)')
+
+>>> ingredient = "Kumquat: 2 cups"
+
+>>> import re
+>>> ingredient_pattern = re.compile(r'(?P<ingredient>\w+):\s+(?P<amount>\d+)\s+(?P<unit>\w+)')
+>>> match = ingredient_pattern.match(ingredient)
+
+>>> item = match.groups()
+>>> item
+('Kumquat', '2', 'cups')
+
+>>> from fractions import Fraction
+>>> Fraction(item[1])
+Fraction(2, 1)
+
+
+# Subsection: How to do it...
+
+>>> from typing import NamedTuple
+
+>>> class Ingredient(NamedTuple):
+...     ingredient: str
+...     amount: str
+...     unit: str
+
+>>> item_2 = Ingredient('Kumquat', '2', 'cups')
+
+>>> Fraction(item_2.amount)
+Fraction(2, 1)
+>>> f"Use {item_2.amount} {item_2.unit} fresh {item_2.ingredient}"
+'Use 2 cups fresh Kumquat'
+
+
+# Subsection: There's more...
+
+>>> from typing import NamedTuple
+>>> from fractions import Fraction
+>>> class IngredientF(NamedTuple):
+...     ingredient: str
+...     amount: Fraction
+...     unit: str
+
+>>> item_3 = IngredientF('Kumquat', Fraction('2'), 'cups')
+
+>>> f'{item_3.ingredient} doubled: {item_3.amount * 2}'
+'Kumquat doubled: 4'
+
+

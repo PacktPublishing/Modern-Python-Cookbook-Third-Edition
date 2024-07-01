@@ -1,0 +1,36 @@
+[project]
+name = "ch16"
+version = "2024.1.0"
+description = """
+Python Cookbook, 3rd Ed.
+Dependencies and Virtual Environments
+"""
+requires-python = ">=3.12"
+authors = [
+  {email = "your.email@example.com", name = "Your Name"}
+]
+dependencies = [
+    "pydantic",
+    "beautifulsoup4",
+    "types-beautifulsoup4",
+    "jupyterlab",
+    "matplotlib",
+    "memray"
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+test = [
+    "tox",
+    "pytest",
+    "ruff",
+    "mypy",
+    "pip-tools",
+]
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools"
+]

@@ -1,0 +1,66 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Writing better RST markup in docstrings
+
+
+# Subsection: How to do it...
+
+Topic
+=====
+
+
+# Subsection: How it works...
+
+TITLE
+=====
+
+SOMETHING
+----------
+
+MORE
+^^^^^
+
+EXTRA
+^^^^^
+
+LEVEL 2
+-------
+
+LEVEL 3
+^^^^^^^^
+
+
+# Subsection: There's more...
+
+It helps to have bullets because:
+-  They can help clarify
+-  They can help organize
+
+..  important::
+
+    Do not flip the bozo bit.
+
+
+# Subsection: There's more...
+# Topic: Using directives
+
+.. note:: Note Title
+
+    We need to indent the content of an admonition.
+
+    This will set the text off from other material.
+
+.. parsed-literal::
+
+    any text
+
+    *almost* any format
+
+    the text is preserved
+
+    but **inline** markup can be used.
+
+
+
+# End of Writing better RST markup in docstrings

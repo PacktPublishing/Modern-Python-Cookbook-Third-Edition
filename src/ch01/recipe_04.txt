@@ -1,0 +1,99 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Rewriting an immutable string
+
+
+
+>>> title = "Recipe 5: Rewriting, and the Immutable String"
+>>> title[8] = ''
+Traceback (most recent call last):
+...
+TypeError: 'str' object does not support item assignment
+
+
+# Subsection: Getting ready
+
+>>> title = "Recipe 5: Rewriting, and the Immutable String"
+
+
+# Subsection: How to do it...
+
+some_string = some_string.method()
+
+some_string = some_string[:chop_here]
+
+
+# Subsection: How to do it...
+# Topic: Slicing a piece of a string
+
+>>> colon_position = title.index(':')
+
+>>> discard, post_colon = title[:colon_position], title[colon_position+1:]
+>>> discard
+'Recipe 5'
+>>> post_colon
+' Rewriting, and the Immutable String'
+
+>>> pre_colon_text, _, post_colon_text = title.partition(':')
+
+>>> pre_colon_text
+'Recipe 5'
+>>> post_colon_text
+' Rewriting, and the Immutable String'
+
+
+# Subsection: How to do it...
+# Topic: Updating a string with a replacement
+
+>>> post_colon_text = post_colon_text.replace('{} ', '_')
+>>> post_colon_text = post_colon_text.replace(',', '_')
+>>> post_colon_text
+' Rewriting_ and the Immutable String'
+
+>>> from string import whitespace, punctuation
+
+>>> for character in whitespace + punctuation:
+...     post_colon_text = post_colon_text.replace(character, '_')
+
+>>> post_colon_text
+'_Rewriting__and_the_Immutable_String'
+
+>>> from string import whitespace, punctuation
+
+>>> title = "Recipe 5: Rewriting an Immutable String"
+>>> title.translate({ord(c): '_' for c in whitespace+punctuation})
+'Recipe_5__Rewriting_an_Immutable_String'
+
+
+# Subsection: How to do it...
+# Topic: Removing extra punctuation marks
+
+>>> post_colon_text = post_colon_text.strip('_')
+
+>>> while '__' in post_colon_text:
+...     post_colon_text = post_colon_text.replace('__', '_')
+
+
+# Subsection: How it works...
+
+>>> id(post_colon_text)  # doctest: +SKIP
+4346207968
+
+>>> post_colon_text = post_colon_text.replace('_', '-')
+
+>>> id(post_colon_text)  # doctest: +SKIP
+4346205488
+
+
+# Subsection: There's more...
+
+>>> 'some word'.isnumeric()
+False
+
+>>> '1298'.isnumeric()
+True
+
+>>> post_colon_text = post_colon_text.lower()
+
+

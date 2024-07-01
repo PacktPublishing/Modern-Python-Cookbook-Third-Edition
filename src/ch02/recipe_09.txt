@@ -1,0 +1,54 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Concealing an exception root cause
+
+
+# Subsection: How to do it...
+
+>>> class MyAppError(Exception):
+...     pass
+
+>>> try:
+...     None.some_method(42)  # Raises an exception
+... except AttributeError as exception:
+...     raise MyAppError("Some Known Problem") from None
+Traceback (most recent call last):
+...
+MyAppError: Some Known Problem
+
+
+# Subsection: How it works...
+
+>>> try:
+...     None.some_method(42)
+... except AttributeError as exception:
+...     raise MyAppError("Some Known Problem") from None
+Traceback (most recent call last):
+...
+MyAppError: Some Known Problem
+
+
+>>> try:
+...     None.some_method(42)
+... except AttributeError as exception:
+...     raise MyAppError("Some Known Problem")
+... # doctest: +SKIP
+Traceback (most recent call last):
+  File "<doctest recipe_09.txt[3]>", line 2, in <module>
+    None.some_method(42)
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'some_method'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ...
+    exec...
+  File ...
+    raise...
+MyAppError: Some Known Problem
+
+
+
+# End of Concealing an exception root cause

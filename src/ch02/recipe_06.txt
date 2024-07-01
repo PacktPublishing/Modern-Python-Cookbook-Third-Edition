@@ -1,0 +1,51 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Saving intermediate results with the := "walrus" operator
+
+
+# Subsection: Getting ready
+
+>>> s = sum((1 / (2 * n + 1)) ** 2 for n in range(0, 20_000))
+
+>>> b = 0
+>>> for n in range(0, 20_000):
+...     if (1 / ( 2 * n + 1)) ** 2 >= 0.000_000_001:
+...         b = b + (1 / (2 * n + 1)) ** 2
+
+
+# Subsection: How to do it...
+
+>>> p = 0
+>>> for n in range(0, 20_000):
+...     term = (1 / (2 * n + 1)) ** 2
+...     if term >= 0.000_000_001:
+...         p = p + term
+
+>>> q = 0
+>>> for n in range(0, 20_000):
+...     if (term := (1 / (2 * n + 1)) ** 2) >= 0.000_000_001:
+...         q = q + term
+...     else:
+...         break
+
+
+# Subsection: There's more...
+
+>>> r = 0
+>>> n = 0
+>>> while (term := (1 / (2 * n + 1)) ** 2) >= 0.000_000_001:
+...     r += term
+...     n += 1
+
+>>> data = [11, 13, 17, 19, 23, 29]
+>>> total = 0
+>>> running_sum = [(total := total + d) for d in data]
+>>> total
+112
+>>> running_sum
+[11, 24, 41, 60, 83, 112]
+
+
+
+# End of Saving intermediate results with the := "walrus" operator

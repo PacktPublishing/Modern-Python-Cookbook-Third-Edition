@@ -1,0 +1,59 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Managing a context using the with statement
+
+
+# Subsection: Getting ready
+
+>>> import csv
+
+>>> from pathlib import Path
+
+>>> some_source = [
+...     [2,3,5],
+...     [7,11,13],
+...     [17,19,23]]
+
+
+# Subsection: How to do it...
+
+>>> target_path = Path.cwd() / "data" / "test.csv"
+>>> with target_path.open('w', newline='') as target_file:
+...     pass
+
+>>> target_path = Path.cwd() / "data" / "test.csv"
+>>> with target_path.open('w', newline='') as target_file:
+...     writer = csv.writer(target_file)
+...     writer.writerow(['column', 'data', 'heading'])
+...     writer.writerows(some_source)
+21
+
+>>> target_path = Path.cwd() / "data" / "test.csv"
+>>> with target_path.open('w', newline='') as target_file:
+...     writer = csv.writer(target_file)
+...     _ = writer.writerow(['column', 'data', 'heading'])
+...     writer.writerows(some_source)
+>>> print(f'finished writing {target_path.name}')
+finished writing test.csv
+
+
+# Subsection: How it works...
+
+>>> try:
+...     with target_path.open('w', newline='') as target_file:
+...         writer = csv.writer(target_file)
+...         _ = writer.writerow(['column', 'data', 'heading'])
+...         _ = writer.writerow(some_source[0])
+...         raise Exception("Testing")
+... except Exception as exc:
+...     print(f"{target_file.closed=}")
+...     print(f"{exc=}")
+target_file.closed=True
+exc=Exception('Testing')
+>>> print(f"finished writing {target_path.name}")
+finished writing test.csv
+
+
+
+# End of Managing a context using the with statement

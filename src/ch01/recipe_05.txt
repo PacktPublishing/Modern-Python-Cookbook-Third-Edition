@@ -1,0 +1,58 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: String parsing with regular expressions
+
+
+# Subsection: Getting ready
+
+>>> ingredient = "Kumquat: 2 cups"
+
+
+# Subsection: How to do it...
+
+(ingredient words): (amount digits) (unit words)
+
+>>> import re
+
+>>> pattern_text = r'([\w\s]+):\s+(\d+)\s+(\w+)'
+
+>>> pattern = re.compile(pattern_text)
+
+>>> match = pattern.match(ingredient)
+>>> match is None
+False
+>>> match.groups()
+('Kumquat', '2', 'cups')
+
+>>> match.group(1)
+'Kumquat'
+>>> match.group(2)
+'2'
+>>> match.group(3)
+'cups'
+
+
+# Subsection: How it works...
+
+(?P<name>\w+)\s*[=:]\s*(?P<value>.*)
+
+size = 12
+weight: 14
+
+
+# Subsection: There's more...
+
+>>> ingredient_pattern = re.compile(
+... r'(?P<ingredient>[\w\s]+):\s+' # name of the ingredient up to the ":"
+... r'(?P<amount>\d+)\s+' # amount, all digits up to a space
+... r'(?P<unit>\w+)' # units, alphanumeric characters
+... )
+
+>>> ingredient_pattern_x = re.compile(r'''
+... (?P<ingredient>[\w\s]+):\s+ # name of the ingredient up to the ":"
+... (?P<amount>\d+)\s+ # amount, all digits up to a space
+... (?P<unit>\w+) # units, alphanumeric characters
+... ''', re.X)
+
+

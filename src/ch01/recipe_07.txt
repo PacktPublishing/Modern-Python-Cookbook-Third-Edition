@@ -1,0 +1,30 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Building complicated strings from lists of characters
+
+
+# Subsection: Getting ready
+
+>>> title = "Recipe 5: Rewriting an Immutable String"
+
+>>> from string import whitespace, punctuation
+
+
+# Subsection: How to do it...
+
+>>> title_list = list(title)
+
+>>> colon_position = title_list.index(':')
+
+>>> del title_list[:colon_position+1]
+
+>>> for position in range(len(title_list)):
+...     if title_list[position] in whitespace+punctuation:
+...         title_list[position]= '_'
+
+>>> title = ''.join(title_list)
+>>> title
+'_Rewriting_an_Immutable_String'
+
+

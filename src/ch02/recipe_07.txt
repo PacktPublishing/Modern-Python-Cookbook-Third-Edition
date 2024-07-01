@@ -1,0 +1,76 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Avoiding a potential problem with break statements
+
+
+# Subsection: Getting ready
+
+>>> sample_1 = "some_name = the_value"
+
+>>> for position in  range(len(sample_1)):
+...     if sample_1[position] in '=:':
+...         break
+>>> print(f"name={sample_1[:position]!r}",
+...     f"value={sample_1[position+1:]!r}")
+name='some_name ' value=' the_value'
+
+>>> sample_2 = "name_only"
+>>> for position in range(len(sample_2)):
+...     if sample_2[position] in '=:':
+...         break
+>>> print(f"name={sample_2[:position]!r}",
+...     f"value={sample_2[position+1:]!r}")
+name='name_onl' value=''
+
+
+# Subsection: How to do it...
+
+assert text[position] in '=:'  # We found a = or :
+
+>>> position = -1
+>>> for position in range(len(sample_2)):
+...     if sample_2[position] in '=:':
+...         break
+...
+>>> if position == -1:
+...     print(f"name=None value=None")
+... elif not(sample_2[position] == ':' or sample_2[position] == '='):
+...     print(f"name={sample_2!r} value=None")
+... else:
+...     print(f"name={sample_2[:position]!r}",
+...         f"value={sample_2[position+1:]!r}")
+name='name_only' value=None
+
+
+# Subsection: How it works...
+
+>>> if len(sample_2) > 0:
+...     name, value = sample_2, None
+... else:
+...     name, value = None, None
+>>> for position in range(len(sample_2)):
+...     if sample_2[position] in '=:':
+...         name, value = sample_2[:position], sample2[position:]
+...         break
+>>> print(f"{name=!r} {value=!r}")
+name='name_only' value=None
+
+
+# Subsection: There's more...
+
+>>> for position in  range(len(sample_2)):
+...     if sample_2[position] in '=:':
+...         name, value = sample_2[:position], sample_2[position+1:]
+...         break
+... else:
+...     if len(sample_2) > 0:
+...         name, value = sample_2, None
+...     else:
+...         name, value = None, None
+>>> print(f"{name=!r} {value=!r}")
+name='name_only' value=None
+
+
+
+# End of Avoiding a potential problem with break statements

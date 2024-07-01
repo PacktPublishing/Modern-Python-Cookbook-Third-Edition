@@ -1,0 +1,58 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Including descriptions and documentation
+
+
+# Subsection: How to do it...
+
+"""
+Downloads and decodes the current Special Marine Warning (SMW)
+for the area 'AKQ'.
+"""
+
+
+# Subsection: How to do it...
+# Topic: Writing docstrings for scripts
+
+"""
+Downloads and decodes the current Special Marine Warning (SMW)
+for the area \textquotesingle AKQ\textquotesingle{}
+
+SYNOPSIS
+========
+
+::
+
+    python3 akq_weather.py
+
+DESCRIPTION
+===========
+
+Downloads the Special Marine Warnings
+
+Files
+=====
+
+Writes a file,
+''AKW.html''.
+
+EXAMPLES
+========
+
+Here's an example::
+
+    slott\$ python3 akq_weather.py
+    <h3>There are no products active at this time.</h3>
+"""
+
+
+# Subsection: There's more...
+
+Here's an example::
+
+    more_code()
+
+
+
+# End of Including descriptions and documentation

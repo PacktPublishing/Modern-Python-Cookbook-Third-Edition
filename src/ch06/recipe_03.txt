@@ -1,0 +1,38 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: User Inputs and Outputs
+# Recipe: Debugging with f"{value=}
+
+
+# Subsection: Getting ready
+
+>>> import statistics
+>>> size = [2353, 2889, 2195, 3094,
+...     725, 1099, 690, 1207, 926,
+...     758, 615, 521, 1320]
+>>> mean_size = statistics.mean(size)
+>>> std_size = statistics.stdev(size)
+>>> sig1 = round(mean_size + std_size, 1)
+>>> [x for x in size if x > sig1]
+[2353, 2889, 3094]
+
+
+# Subsection: How to do it...
+
+>>> print(
+...     f"{mean_size=:.2f}, {std_size=:.2f}"
+... )
+mean_size=1414.77, std_size=901.10
+
+
+# Subsection: There's more...
+
+>>> print(
+...     f"{mean_size=:.2f}, {std_size=:.2f},"
+...     f" {mean_size + 2 * std_size=:.2f}"
+... )
+mean_size=1414.77, std_size=901.10, mean_size + 2 * std_size=3216.97
+
+
+
+# End of Debugging with f"\{value=\

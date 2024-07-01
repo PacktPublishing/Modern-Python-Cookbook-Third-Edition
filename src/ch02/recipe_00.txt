@@ -1,0 +1,15 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Statements and Syntax
+# Recipe: Introduction
+
+
+
+>>> print("hello world")
+hello world
+
+>>> quotient, remainder = divmod(355, 113)
+
+
+
+# End of Introduction

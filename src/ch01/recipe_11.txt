@@ -1,0 +1,68 @@
+# Python Cookbook, 3rd Ed.
+#
+# Chapter: Numbers, Strings, and Tuples
+# Recipe: Using tuples of items
+
+
+# Subsection: Getting ready
+
+>>> ingredient = "Kumquat: 2 cups"
+
+>>> import re
+>>> ingredient_pattern = re.compile(r'(?P<ingredient>\w+):\s+(?P<amount>\d+)\s+(?P<unit>\w+)')
+>>> match = ingredient_pattern.match(ingredient)
+>>> match.groups()
+('Kumquat', '2', 'cups')
+
+
+# Subsection: How to do it...
+# Topic: Creating tuples
+
+>>> from fractions import Fraction
+>>> my_data = ('Rice', Fraction(1/4), 'cups')
+
+>>> one_tuple = ('item', )
+>>> len(one_tuple)
+1
+
+>>> 355,
+(355,)
+
+
+# Subsection: How to do it...
+# Topic: Extracting items from a tuple
+
+>>> my_data[1]
+Fraction(1, 4)
+
+>>> ingredient, amount, unit =  my_data
+>>> ingredient
+'Rice'
+>>> unit
+'cups'
+
+
+# Subsection: How it works...
+
+>>> t = ('Kumquat', '2', 'cups')
+
+>>> len(t)
+3
+
+>>> t.count('2')
+1
+
+>>> t.index('cups')
+2
+>>> t[2]
+'cups'
+
+>>> t.index('Rice')
+Traceback (most recent call last):
+...
+ValueError: tuple.index(x): x not in tuple
+
+>>> 'Rice' in t
+False
+
+
