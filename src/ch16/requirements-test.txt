@@ -312,7 +312,7 @@ textual==0.48.2
     # via memray
 tinycss2==1.2.1
     # via nbconvert
-tornado==6.4
+tornado==6.4.1
     # via
     #   ipykernel
     #   jupyter-client
