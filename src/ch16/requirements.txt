@@ -58,7 +58,7 @@ fonttools==4.47.2
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
-idna==3.6
+idna==3.7
     # via
     #   anyio
     #   jsonschema
