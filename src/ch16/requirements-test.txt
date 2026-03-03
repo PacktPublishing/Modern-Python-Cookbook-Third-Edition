@@ -133,7 +133,7 @@ jupyter-server==2.12.5
     #   notebook-shim
 jupyter-server-terminals==0.5.2
     # via jupyter-server
-jupyterlab==4.0.12
+jupyterlab==4.2.5
     # via ch17 (pyproject.toml)
 jupyterlab-pygments==0.3.0
     # via nbconvert
