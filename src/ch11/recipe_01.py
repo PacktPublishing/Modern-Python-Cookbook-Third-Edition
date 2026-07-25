@@ -96,7 +96,7 @@ PosixPath('/path/to/some/output/file.src')
 # Subsection: How to do it...
 # Topic: Comparing file dates to see which is newer
 
-# assumes US/EST
+# Uses explicit timezone
 test_example_6_1 = """
 >>> from pathlib import Path
 >>> from argparse import Namespace
@@ -114,8 +114,8 @@ test_example_6_1 = """
 
 >>> import datetime
 >>> mtime_1 = file1_path.stat().st_mtime
->>> datetime.datetime.fromtimestamp(mtime_1)
-datetime.datetime(2019, 11, 3, 13, 33, 52)
+>>> datetime.datetime.fromtimestamp(mtime_1, datetime.UTC)
+datetime.datetime(2019, 11, 3, 18, 33, 52, tzinfo=datetime.timezone.utc)
 """
 
 # Subsection: How to do it...

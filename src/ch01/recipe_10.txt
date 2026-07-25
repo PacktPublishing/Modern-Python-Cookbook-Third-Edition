@@ -6,13 +6,18 @@
 
 # Subsection: Getting ready
 
+>>> import ssl
+>>> context = ssl.create_default_context()
+>>> context.check_hostname = False
+>>> context.verify_mode = ssl.CERT_NONE
+
 >>> import urllib.request
 >>> warnings_uri = (
 ...     'https://forecast.weather.gov/'
 ...     'product.php?site=AKQ&product=SMW&issuedby=AKQ'
 ... )
 
->>> with urllib.request.urlopen(warnings_uri) as source:
+>>> with urllib.request.urlopen(warnings_uri, context=context) as source:
 ...     forecast_text = source.read()
 
 $ curl 'https://forecast.weather.gov/product.php?site=AKQ&product=SMW&issuedby=AKQ' -o AKQ.html

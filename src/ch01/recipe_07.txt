@@ -22,9 +22,11 @@
 >>> for position in range(len(title_list)):
 ...     if title_list[position] in whitespace+punctuation:
 ...         title_list[position]= '_'
+...     else:
+...         title_list[position] = title_list[position].lower()
 
 >>> title = ''.join(title_list)
 >>> title
-'_Rewriting_an_Immutable_String'
+'_rewriting_an_immutable_string'
 
 

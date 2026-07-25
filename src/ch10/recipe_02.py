@@ -186,7 +186,7 @@ test_make_deck = """
 test_type_statement_problem = """
 >>> import sys
 >>> sys.version
-'3.12.0 | packaged by conda-forge | (main, Oct  3 2023, 08:43:38) [Clang 15.0.7 ]'
+'3.12.3 (v3.12.3:f6650f9ad7, Apr  9 2024, 08:18:47) [Clang 13.0.0 (clang-1300.0.29.30)]'
 
 >>> type Unreferenced = Path
 >>> x = Path("somewhere")
